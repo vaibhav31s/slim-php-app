@@ -28,7 +28,7 @@ $app->get('/players/', function(Request $request, Response $response) {
         ->from('Players')
     ;
     
-    $results = $queryBuilder->executeQuery()->fetchAll();
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
 
     $response->getBody()->write(json_encode($results));
     return $response
@@ -48,7 +48,7 @@ $app->get('/player/{id}', function(Request $request, Response $response, array $
         ->select('Id', 'Name', 'Team', 'Category')
         ->from('Players')
         ->where('Id = ?')
-        ->setParameter(1, $args['id'])
+        ->setParameter(0, $args['id'])
     ;
     
     $results = $queryBuilder->executeQuery()->fetchAssociative();
@@ -72,9 +72,9 @@ $app->post('/player/add', function(Request $request, Response $response) {
         ->setValue('Name', '?')
         ->setValue('Team', '?')
         ->setValue('Category', '?')
-        ->setParameter(1, $parsedBody['Name'])
-        ->setParameter(2, $parsedBody['Team'])
-        ->setParameter(3, $parsedBody['Category'])
+        ->setParameter(0, $parsedBody['Name'])
+        ->setParameter(1, $parsedBody['Team'])
+        ->setParameter(2, $parsedBody['Category'])
     ;
 
     $results = $queryBuilder->executeQuery()->fetchAssociative();
@@ -99,10 +99,10 @@ $app->put('/player/{id}', function(Request $request, Response $response, array $
         ->set('Team', '?')
         ->set('Category', '?')
         ->where('Id = ?')
-        ->setParameter(1, $parsedBody['Name'])
-        ->setParameter(2, $parsedBody['Team'])
-        ->setParameter(3, $parsedBody['Category'])
-        ->setParameter(4, $args['id'])
+        ->setParameter(0, $parsedBody['Name'])
+        ->setParameter(1, $parsedBody['Team'])
+        ->setParameter(2, $parsedBody['Category'])
+        ->setParameter(3, $args['id'])
     ;
 
     $result = $queryBuilder->executeStatement();
@@ -125,7 +125,7 @@ $app->delete('/player/{id}', function (Request $request, Response $response, arr
         $queryBuilder
             ->delete('Players')
             ->where('Id = ?')
-            ->setParameter(1, $args['id'])
+            ->setParameter(0, $args['id'])
         ;
 
         $result = $queryBuilder->executeStatement();

@@ -19,7 +19,7 @@ $apiKeyVerifier = function(Request $request, RequestHandler $handler) {
         ->select('ApiKey')
         ->from('Users')
         ->where('UserName = ?')
-        ->setParameter(1, $UserName)
+        ->setParameter(0, $UserName)
     ;
 
     $result = $queryBuilder->executeQuery()->fetchAssociative();
