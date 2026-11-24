@@ -1,12 +1,12 @@
 {
     "require": {
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.5",
-        "doctrine/dbal": "^3.4",
-        "php-di/php-di": "^6.4",
-        "justinrainbow/json-schema": "^5.2"
+        "slim/slim": "^4.15",
+        "slim/psr7": "^1.8",
+        "doctrine/dbal": "^4",
+        "php-di/php-di": "^7",
+        "justinrainbow/json-schema": "^6"
     },
     "require-dev": {
-        "symfony/dotenv": "^6.1"
+        "symfony/dotenv": "^7"
     }
 }
